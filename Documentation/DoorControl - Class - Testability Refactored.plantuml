@@ -1,0 +1,104 @@
+@startuml
+skinparam dpi 300
+skinparam monochrome true
+skinparam linetype ortho
+hide circle
+/'hide <<Boundary>> circle
+hide <<Controller>> circle    
+hide <<Domain>> circle'/
+
+/' i sekvensdiagrammer, brug defines til at skrive
+ lange navne '/
+
+
+class DoorControl
+{
+    + RequestEntry(id)
+    + DoorOpen()
+    + DoorClosed()
+    + DoorOpened()
+}
+
+class IDoor <<Interface>>
+{
+    Open()
+    Close()   
+}
+
+class Door
+{
+    + Open()
+    + Close()
+}
+
+class FakeDoor
+{
+    + Open()
+    + Close()
+}
+
+class IUserValidation <<Interface>>
+{
+    + ValidateEntryRequest(id)
+}
+
+class UserValidation
+{
+    + ValidateEntryRequest(id)
+}
+
+class FakeUserValidation
+{
+    + ValidateEntryRequest(id)
+}
+
+class IEntryNotification <<Interface>>
+{
+    NotifyEntryGranted()
+    NotifyEntryDenied()
+}
+
+class EntryNotification
+{
+    + NotifyEntryGranted()
+    + NotifyEntryDenied()
+}
+
+class FakeEntryNotification
+{
+    + NotifyEntryGranted()
+    + NotifyEntryDenied()
+}
+
+class IAlarm <<Interface>>
+{
+    RaiseAlarm()
+}
+
+class Alarm
+{
+    + RaiseAlarm()
+}
+
+class FakeAlarm
+{
+    + RaiseAlarm()
+}
+
+DoorControl --> IUserValidation
+DoorControl --> IEntryNotification
+DoorControl <-left-> IDoor
+DoorControl -right-> IAlarm
+IDoor <|.. Door
+IDoor <|.. FakeDoor
+IUserValidation <|.. UserValidation
+IUserValidation <|.. FakeUserValidation
+IEntryNotification <|.. EntryNotification
+IEntryNotification <|.. FakeEntryNotification
+IAlarm <|.. Alarm
+IAlarm <|.. FakeAlarm
+/'
+ *-- 
+ *-- 
+'/
+@enduml

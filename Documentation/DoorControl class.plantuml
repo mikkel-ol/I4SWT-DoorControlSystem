@@ -1,0 +1,53 @@
+@startuml
+skinparam dpi 300
+skinparam monochrome true
+skinparam linetype ortho
+hide circle
+/'hide <<Boundary>> circle
+hide <<Controller>> circle    
+hide <<Domain>> circle'/
+
+/' i sekvensdiagrammer, brug defines til at skrive
+ lange navne '/
+
+
+class DoorControl
+{
+    + RequestEntry(id)
+    + DoorOpen()
+    + DoorClosed()
+    + DoorOpened()
+}
+
+class Door
+{
+    + Open()
+    + Close()
+}
+
+class UserValidation
+{
+    + ValidateEntryRequest(id)
+}
+
+class EntryNotification
+{
+    + NotifyEntryGranted()
+    + NotifyEntryDenied()
+}
+
+class Alarm
+{
+    + RaiseAlarm()
+}
+
+DoorControl --> UserValidation
+DoorControl --> EntryNotification
+DoorControl <-left-> Door
+DoorControl --> Alarm
+
+/'
+ *-- 
+ *-- 
+'/
+@enduml
