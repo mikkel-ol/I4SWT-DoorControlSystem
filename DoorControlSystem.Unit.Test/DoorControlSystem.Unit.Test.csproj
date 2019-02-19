@@ -54,7 +54,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Door Control System\DoorControlSystem.csproj">
+    <ProjectReference Include="..\DoorControlSystem\DoorControlSystem.csproj">
       <Project>{4fb00d3a-606d-4997-adac-9f0843743d7c}</Project>
       <Name>DoorControlSystem</Name>
     </ProjectReference>
