@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using NUnit.Framework;
 
-namespace DoorControlSystem.Unit.Test
+namespace DoorControlSystem.Test
 {
     [TestFixture]
     public class DoorControlUnitTest
