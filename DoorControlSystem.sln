@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.329
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoorControlSystem", "Door Control System\DoorControlSystem.csproj", "{4FB00D3A-606D-4997-ADAC-9F0843743D7C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoorControlSystem", "DoorControlSystem\DoorControlSystem.csproj", "{4FB00D3A-606D-4997-ADAC-9F0843743D7C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoorControlSystem.Unit.Test", "DoorControlSystem.Unit.Test\DoorControlSystem.Unit.Test.csproj", "{E790E021-DD4B-4BC5-AA87-E3F579539EC4}"
 EndProject
