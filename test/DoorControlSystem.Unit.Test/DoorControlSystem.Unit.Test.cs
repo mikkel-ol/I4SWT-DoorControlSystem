@@ -32,7 +32,7 @@ namespace DoorControlSystem.Unit.Test
             fakeUserValidation2.SetCorrectIDForTest("CorrectID");
             uut2.RequestEntry("CorrectID");
 
-            Assert.That(fakeUserValidation2.GetWasIDCorrectForTest(), Is.EqualTo(true));
+            Assert.That(fakeUserValidation2.GetWasIDCorrectForTest(), Is.EqualTo(false));
         }
 
         [Test]
