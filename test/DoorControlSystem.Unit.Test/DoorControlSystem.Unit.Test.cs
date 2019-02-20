@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using NSubstitute;
 using NUnit.Framework;
 
 namespace DoorControlSystem.Unit.Test
@@ -9,6 +10,78 @@ namespace DoorControlSystem.Unit.Test
     [TestFixture]
     public class DoorControlUnitTest
     {
+        private DoorControl uut = null;
+        private IAlarm _alarm = null;
+        private IDoor _door = null;
+        private IUserValidation _userValidation = null;
+        private IEntryNotification _entryNotification = null;
+
+        [SetUp]
+        public void Setup()
+        {
+            _alarm = Substitute.For<IAlarm>();
+            _door = Substitute.For<IDoor>();
+            _userValidation = Substitute.For<IUserValidation>();
+            _entryNotification = Substitute.For<IEntryNotification>();
+            uut = new DoorControl(_door, _entryNotification, _userValidation);
+        }
+
+        [Test]
+        public void RequestEntry_CallingDoorOpenCorrectID_CalledCorrectly()
+        {
+            _userValidation.ValidateEntryRequest("ID").Returns(true);
+
+            uut.RequestEntry("ID");
+
+
+            _door.Received().Open();
+        }
+
+        [Test]
+        public void RequestEntry_CallingDoorOpenWrongID_OpenNotCalled()
+        {
+            _userValidation.ValidateEntryRequest("WrongID").Returns(false);
+
+            uut.RequestEntry("WrongID");
+
+
+            _door.DidNotReceive().Open();
+        }
+
+        [Test]
+        public void RequestEntry_CallNotifyEntryGrantedCorrectID_MethodCalled()
+        {
+            _userValidation.ValidateEntryRequest("ID").Returns(true);
+
+            uut.RequestEntry("ID");
+
+            _entryNotification.Received().NotifyEntryGranted();
+        }
+
+        [Test]
+        public void RequestEntry_CallNotifyEntryGrantedWrongID_MethodNotCalled()
+        {
+            _userValidation.ValidateEntryRequest("WrongID").Returns(false);
+
+            uut.RequestEntry("WrongID");
+
+            _entryNotification.DidNotReceive().NotifyEntryGranted();
+        }
+
+
+        [Test]
+        public void DoorOpen_CallClose_CloseCalled()
+        {
+
+            uut.DoorOpen();
+
+            _door.Received().Close();
+        }
+
+        //
+        //  OLD HANDWRITTEN TESTS
+        //
+        /*
         private DoorControl uut = null;
 
         [SetUp]
@@ -117,6 +190,6 @@ namespace DoorControlSystem.Unit.Test
             uut2.DoorOpen();
             
             Assert.That(fakeDoor2.GetHasDoorCloseBeenCalled, Is.EqualTo(true));
-        }
+        }*/
     }
 }
