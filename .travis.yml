@@ -14,13 +14,10 @@ script:
   - dotnet restore
   - dotnet build
   - dotnet test 
-  - if [ $(TRAVIS_BRANCH) == "master" ]; then
-      curl -s https://codecov.io/bash > codecov
-      chmod +x codecov
-      ./codecov -f "coverage.info" -t $(CODECOV_TOKEN)
-    else
-      echo "Skipped"
-    fi
+  - curl -s https://codecov.io/bash > codecov
+  - chmod +x codecov
+  - ./codecov -f "coverage.info" -t 131fde5b-aa7b-4290-b2fa-34322281cd29
+
 global:
   - DOTNET_SKIP_FIRST_TIME_EXPERIENCE=true
   - DOTNET_CLI_TELEMETRY_OPTOUT=1
