@@ -7,12 +7,10 @@ solution: DoorControlSystem.sln
 before_install:
   - pip install --user codecov
   - dotnet add test/DoorControlSystem.Unit.Test package coverlet.msbuild
-after_success:
-  - dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=\"lcov\"
 script:
   - dotnet restore
   - dotnet build
-  - dotnet test 
+  - dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=\"lcov\"
   - curl -s https://codecov.io/bash > codecov
   - chmod +x codecov
   - ./codecov -f "test/DoorControlSystem.Unit.Test/coverage.info" -t 131fde5b-aa7b-4290-b2fa-34322281cd29
