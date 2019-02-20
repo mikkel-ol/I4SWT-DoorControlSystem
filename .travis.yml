@@ -6,9 +6,9 @@ dist: xenial
 solution: DoorControlSystem.sln
 before_install:
   - pip install --user codecov
-  - dotnet tool install --global coverlet.console
+  - dotnet add test/DoorControlSystem.Unit.Test package coverlet.msbuild
 after_success:
-  - coverlet test/DoorControlSystem.Unit.Test/bin/Debug/netcoreapp2.2/DoorControlSystem.Unit.Test.dll --target="dotnet" --targetargs "test test/DoorControlSystem.Unit.Test --no-build" -f lcov
+  - dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=\"lcov\"
   - codecov --file coverage.info --disable search
 script:
   - dotnet restore
